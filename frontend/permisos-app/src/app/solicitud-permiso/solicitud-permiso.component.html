@@ -1,0 +1,39 @@
+<h2>Solicitud de Permiso</h2>
+<form #formulario="ngForm" (ngSubmit)="enviarSolicitud()" novalidate>
+  <div>
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="permiso.nombre" placeholder="Nombre" name="Nombre"
+      [ngClass]="{'invalido': errores?.Nombre}" required />
+    <div class="error" *ngIf="errores?.Nombre">
+      {{ errores.Nombre[0] }}
+    </div>
+  </div>
+  <div>
+    <label>Correo:</label>
+    <input type="email" [(ngModel)]="permiso.correo" name="Correo" placeholder="Correo"
+      [ngClass]="{'invalido': errores?.Correo}" required />
+    <div class="error" *ngIf="errores?.Correo">
+      {{ errores.Correo[0] }}
+    </div>
+  </div>
+  <div>
+    <label>Motivo:</label>
+    <textarea [(ngModel)]="permiso.motivo" name="Motivo" placeholder="Motivo"
+      [ngClass]="{'invalido': errores?.Motivo}" required></textarea>
+    <div class="error" *ngIf="errores?.Motivo">
+      {{ errores.Motivo[0] }}
+    </div>
+  </div>
+  <div>
+    <label>Subir Arcivo Pdf:</label>
+    <input type="file" (change)="onArchivoSeleccionado($event)" accept="application/pdf" />
+    <div class="error" *ngIf="errores?.Motivo">
+      <!-- {{ errores. }} -->
+    </div>
+  </div>
+  <button type="submit">Enviar Solicitud</button>
+</form>
+
+<div *ngIf="mensaje" class="mensaje">
+  {{ mensaje }}
+</div>

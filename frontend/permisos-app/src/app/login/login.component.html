@@ -1,0 +1,47 @@
+<h2>Iniciar sesión</h2>
+
+<form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+  <!-- Correo -->
+  <div>
+    <label for="correo">Correo</label>
+    <input
+      type="email"
+      id="correo"
+      name="correo"
+      [(ngModel)]="correo"
+      required
+      email
+      #correoInput="ngModel"
+    />
+    <div *ngIf="correoInput.invalid && correoInput.touched">
+      <span *ngIf="correoInput.errors?.['required']">El correo es obligatorio.</span>
+      <span *ngIf="correoInput.errors?.['email']">Formato de correo no válido.</span>
+    </div>
+  </div>
+
+  <!-- Contraseña -->
+  <div>
+    <label for="contrasena">Contraseña</label>
+    <input
+      type="password"
+      id="contrasena"
+      name="contrasena"
+      [(ngModel)]="contrasena"
+      required
+      minlength="4"
+      #contrasenaInput="ngModel"
+    />
+    <div *ngIf="contrasenaInput.invalid && contrasenaInput.touched">
+      <span *ngIf="contrasenaInput.errors?.['required']">La contraseña es obligatoria.</span>
+      <span *ngIf="contrasenaInput.errors?.['minlength']">Mínimo 4 caracteres.</span>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Botón -->
+  <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+</form>

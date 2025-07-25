@@ -1,0 +1,29 @@
+# BACKEND (.NET)
+bin/
+obj/
+*.user
+*.suo
+*.dbmdl
+*.log
+*.vs/
+appsettings.*.json
+
+# FRONTEND (Angular)
+node_modules/
+dist/
+.angular/
+.env
+
+# DATABASE
+*.bak
+*.mdf
+*.ldf
+*.ndf
+
+# SISTEMA
+.DS_Store
+Thumbs.db
+
+# EDITORES
+.vscode/
+.idea/

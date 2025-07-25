@@ -1,0 +1,20 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.mensaje {
+  margin: 10px 0;
+  color: green;
+}

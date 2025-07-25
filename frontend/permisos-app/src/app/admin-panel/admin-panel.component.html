@@ -1,0 +1,61 @@
+<h2>Panel de Administración</h2>
+
+<label>Filtrar por fecha:
+    <input type="date" name="fechaFiltro" [(ngModel)]="fechaFiltro" (change)="onFechaChange()" />
+</label>
+
+<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Motivo</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+            <th>Archivos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let solicitud of solicitudes">
+            <td>{{ solicitud.nombre }}</td>
+            <td>{{ solicitud.correo }}</td>
+            <td>{{ solicitud.motivo }}</td>
+            <td>{{ solicitud.fechaSolicitud | date: 'yyyy-MM-dd HH:mm' }}</td>
+            <td>{{ solicitud.estado }}</td>
+            <td *ngIf="solicitud.estado === 'Pendiente'">
+                <button (click)="actualizarEstado(solicitud.id, 'Aprobado')"
+                    [disabled]="solicitud.estado !== 'Pendiente'">Aprobar</button>
+                <button (click)="actualizarEstado(solicitud.id, 'Rechazado')"
+                    [disabled]="solicitud.estado !== 'Pendiente'">Rechazar</button>
+            </td>
+            <td *ngIf="solicitud.estado !== 'Pendiente'">
+                <em>Ya respondido</em>
+            </td>
+            <td>
+                <a *ngIf="solicitud.archivoPdf" [href]="'http://localhost:5206/Archivos/' + solicitud.archivoPdf"
+                    target="_blank">
+                    Ver PDF
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="paginacion" style="margin-top: 15px;">
+    <button [disabled]="pagina === 1" (click)="cambiarPagina(pagina - 1)">Anterior</button>
+    Página {{ pagina }}
+    <button [disabled]="pagina * tamanioPagina >= totalSolicitudes"
+        (click)="cambiarPagina(pagina + 1)">Siguiente</button>
+</div>
+
+<div style="margin-top: 10px;">
+    <button (click)="exportarAExcel()">Exportar a Excel</button>
+    <button (click)="exportarAPdf()">Exportar a PDF</button>
+</div>
+
+<button class="btn btn-success" [routerLink]="['/admin/crear-usuario']">
+  Ingresar Usuario / Docente
+</button>
